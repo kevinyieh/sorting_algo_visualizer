@@ -28,10 +28,13 @@ export default class Visualizer {
         }
     }
     // swap(i,j){
-    //     const temp = this.elements[j].value;
-    //     this.elements[j].value = this.elements[i].value
-    //     this.elements[i].value = temp;
-    //     this.elements[j].node.style.height = 
+    //     return () => {
+    //         const temp = this.elements[j].value;
+    //         this.elements[j].value = this.elements[i].value
+    //         this.elements[i].value = temp;
+    //         this.elements[j].node.style.height = `${this.elements[j].value*2}px`;
+    //         this.elements[i].node.style.height = `${this.elements[i].value*2}px`;
+    //     }
     // }
     async swap(i,j,animationHasStopped){
         let small; let big;
@@ -43,12 +46,12 @@ export default class Visualizer {
         const diff = Math.floor((this.elements[big].value - this.elements[small].value)*(this.speed));
         this.elements[small].node.classList.add("swapping");
         this.elements[big].node.classList.add("swapping");
-        await requestAnimationFrame(this.swapHelp(small,
+        await this.swapHelp(small,
             big,
             diff,
             this.elements[small].value,
             this.elements[big].value,
-            animationHasStopped));
+            animationHasStopped)();
         return null;
     }  
     swapHelp(small,big,diff,smallOriginal,bigOriginal,animationHasStopped){

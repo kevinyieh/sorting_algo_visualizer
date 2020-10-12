@@ -18,8 +18,9 @@ export default class bubbleSort{
                     this.elements[big] = temp;
                     this.animating = true;
                     await this.swapAnimate(big,j, () => {
-                        this.animating = false;
+                        console.log("ANIMATION HAS FINISHED")
                     }).then( () => console.log("PROMISE COMPLETE"));
+                    debugger;
                     console.log(`Swap #${count}`)
                     count += 1;
                 }
