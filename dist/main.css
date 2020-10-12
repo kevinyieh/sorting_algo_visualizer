@@ -1,0 +1,16 @@
+div {
+    box-sizing: border-box;
+}
+.bar-chart {
+    transform: rotate(180deg) rotateY(180deg);
+    display: flex;
+    flex-direction: row;
+}
+.bar {
+    background-color: pink;
+    margin: 2px;
+}
+
+.bar.swapping {
+    background-color: orange;
+}
