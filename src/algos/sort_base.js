@@ -21,7 +21,7 @@ export default class Sorter {
             diff,
             small.value,
             big.value)();
-        await timeout(3000);
+        await timeout(800);
         return null;
     }  
     swapHelp(small,big,diff,smallOriginal,bigOriginal){
@@ -49,13 +49,14 @@ export default class Sorter {
     }
     async review(bar1,bar2){
         bar1.review(); bar2.review();
-        await timeout(2000);
+        await timeout(200);
     }
     unreview(bar1,bar2){
         bar1.unreview(); bar2.unreview();
     }
-    highlight(bar){
+    async highlight(bar){
         bar.highlight();
+        await timeout(200);
     }
     unhighlight(bar){
         bar.unhighlight();

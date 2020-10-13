@@ -9,6 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const sorter = new mergeSort(visualizer);
     // const sorter = new bubbleSort(visualizer);
     // console.log(sorter.sort());
-    sorter.sort().then(console.log)
+    sorter.sort();
 })
 
