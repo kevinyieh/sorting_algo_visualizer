@@ -1,7 +1,7 @@
 div {
     box-sizing: border-box;
 }
-.bar-chart {
+#bar-chart {
     transform: rotate(180deg) rotateY(180deg);
     display: flex;
     flex-direction: row;
@@ -10,7 +10,12 @@ div {
     background-color: pink;
     margin: 2px;
 }
-
+.bar.reviewing {
+    background-color: rgb(243, 247, 26);
+}
 .bar.swapping {
     background-color: orange;
+}
+.bar.highlight {
+    background-color: royalblue;
 }

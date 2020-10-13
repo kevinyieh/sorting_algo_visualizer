@@ -1,33 +1,28 @@
 import '@babel/polyfill';
-export default class bubbleSort{
-    constructor(elements,swapAnimate){
-        this.elements = elements;
-        this.swapAnimate = swapAnimate;
+import Sorter from "./sort_base";
+
+
+export default class bubbleSort extends Sorter{
+    constructor(viz){
+        super(viz);
         this.sort = this.sort.bind(this);
-        this.animating = false;
     }
     async sort() {
         console.log("begin sorting");
         let count = 1;
         for(let i = 0; i < this.elements.length; i++){
             let big = 0;
-            for(let j = 1; j < this.elements.length; j ++){
-                if(this.elements[big] > this.elements[j]){
-                    const temp = this.elements[j];
-                    this.elements[j] = this.elements[big];
-                    this.elements[big] = temp;
-                    this.animating = true;
-                    await this.swapAnimate(big,j, () => {
-                        console.log("ANIMATION HAS FINISHED")
-                    }).then( () => console.log("PROMISE COMPLETE"));
-                    debugger;
+            for(let j = 1; j < this.elements.length - i; j ++){
+                await this.review(this.elements[big],this.elements[j]);
+                if(this.elements[big].value > this.elements[j].value){
+                    await this.swap(this.elements[big],this.elements[j]);
                     console.log(`Swap #${count}`)
                     count += 1;
                 }
+                this.unreview(this.elements[big],this.elements[j]);
                 big = j;
             }
         }
-        console.log(this.elements);
         return this.elements;
     }
 }

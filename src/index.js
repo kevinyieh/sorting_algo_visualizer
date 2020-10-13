@@ -1,14 +1,14 @@
 import Visualizer from "./visualizer/visualizer";
 import bubbleSort from "./algos/bubble_sort";
+import mergeSort from "./algos/merge_sort";
 import '@babel/polyfill';
 
 document.addEventListener("DOMContentLoaded", () => {
-    const barChart = document.getElementsByClassName("bar-chart")[0];
-    barChart.style.height = "400px";
-    barChart.style.width = "600px";
-    const visualizer = new Visualizer(10,barChart);
+    const visualizer = new Visualizer(10);
     window.visualizer = visualizer;
-    const sorter = new bubbleSort(visualizer.allElements(),visualizer.swap);
-    setTimeout(sorter.sort,1000);
+    const sorter = new mergeSort(visualizer);
+    // const sorter = new bubbleSort(visualizer);
+    // console.log(sorter.sort());
+    sorter.sort().then(console.log)
 })
 
