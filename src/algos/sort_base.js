@@ -2,9 +2,11 @@ import '@babel/polyfill';
 import timeout from "../util/timeout";
 
 export default class Sorter {
-    constructor(viz){
+    constructor(viz,speed){
         this.elements = viz.elements;
-        this.speed = viz.speed;
+        this.speed = speed;
+        this.finished = viz.finished;
+        this.forcedQuit = false;
     }
     async swap(bar1,bar2){
         let small; let big;
@@ -21,7 +23,7 @@ export default class Sorter {
             diff,
             small.value,
             big.value)();
-        await timeout(800);
+        await timeout(700*(1-this.speed));
         return null;
     }  
     swapHelp(small,big,diff,smallOriginal,bigOriginal){
@@ -32,14 +34,14 @@ export default class Sorter {
                 return null;
             }
             if (small.value + diff >= bigOriginal){
-                small.value = bigOriginal;
-                big.value = smallOriginal;
+                small.updateValue(bigOriginal);
+                big.updateValue(smallOriginal);
             }else {
                 small.value += diff;
                 big.value -= diff;
             }
-            small.node.style.height = `${small.value*2}px`;
-            big.node.style.height = `${big.value*2}px`;
+            small.node.style.height = `${small.value*3}px`;
+            big.node.style.height = `${big.value*3}px`;
             requestAnimationFrame(this.swapHelp(small,
                 big,
                 diff,
@@ -49,16 +51,22 @@ export default class Sorter {
     }
     async review(bar1,bar2){
         bar1.review(); bar2.review();
-        await timeout(200);
+        await timeout(130*(1-this.speed));
     }
     unreview(bar1,bar2){
         bar1.unreview(); bar2.unreview();
     }
     async highlight(bar){
         bar.highlight();
-        await timeout(200);
+        // await timeout(200);
     }
     unhighlight(bar){
         bar.unhighlight();
+    }
+    updateSpeed(newSpeed){
+        this.speed = newSpeed;
+    }
+    forceQuit(){
+        this.forcedQuit = true;
     }
 }
