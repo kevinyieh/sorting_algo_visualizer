@@ -45,7 +45,7 @@ export default class Nav {
         const speedSliderLabel = document.createElement("label");
         speedSliderLabel.innerHTML = "Speed ";
         this.speedSlider = document.createElement("input");
-        DOMUtil.setAttributes(this.speedSlider,{type: "range", min: "3", max:"95", value: `${this.speed * 100}`, class:"speed-slider"});
+        DOMUtil.setAttributes(this.speedSlider,{type: "range", min: "1", max:"100", value: `${this.speed * 100}`, class:"speed-slider"});
         speedSliderLabel.appendChild(this.speedSlider);
         this.speedSliderContainer.appendChild(speedSliderLabel);
         sliderContainer.appendChild(this.speedSliderContainer);
@@ -54,7 +54,6 @@ export default class Nav {
     }
 
     updateSpeed(e){
-        console.log(e.target.value);
         this.speed = parseInt(e.target.value)/100;
         if (this.sorter) this.sorter.updateSpeed(parseInt(e.target.value)/100);
     }
@@ -136,7 +135,6 @@ export default class Nav {
         if (this.sorter) return;
         this.sorter = new this.currentAlgo.sorter(visualizer,this.speed);
         this.sorter.sort().then(() => {
-            console.log(this.sorter);
             if(this.sorter) visualizer.finished();
             this.sorter = null;
         });
