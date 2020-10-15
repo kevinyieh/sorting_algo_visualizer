@@ -7,6 +7,10 @@ export default class Nav {
         this.algos = algos;
         this.nav = document.getElementById("nav");
 
+        this.navLinks = document.createElement("div");
+        this.navLinks.classList.add("nav-links");
+        this.nav.appendChild(this.navLinks);
+
         this.controls = document.createElement("div");
         this.controls.classList.add("controls");
         this.nav.appendChild(this.controls);
@@ -22,12 +26,18 @@ export default class Nav {
         this.updateSpeed = this.updateSpeed.bind(this);
         this.play = this.play.bind(this);
 
+        this.setupLinks();
         this.setupControls();
         this.setupDescription();
     }
 
     setupLinks() {
-        
+        this.githubLink = document.createElement("a");
+        this.githubIcon = document.createElement("i");
+        this.githubIcon.classList.add("fab","fa-github");
+        this.githubLink.appendChild(this.githubIcon);
+        DOMUtil.setAttributes(this.githubLink,{href: "https://github.com/kevinyieh/sorting_algo_visualizer"})
+        this.navLinks.appendChild(this.githubLink);
     }
 
     setupControls(){
