@@ -25,6 +25,11 @@ export default class Nav {
         this.setupControls();
         this.setupDescription();
     }
+
+    setupLinks() {
+        
+    }
+
     setupControls(){
         const sliderContainer = document.createElement("div");
         sliderContainer.classList.add("sliders-container");

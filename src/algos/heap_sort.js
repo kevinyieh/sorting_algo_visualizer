@@ -7,7 +7,9 @@ export default class HeapSort extends Sorter {
     }
 
     describe() {
-        return "";
+        return "Heap sort takes advantage of a tree structure's ability to quickly restructure itself. This heap sort uses a \
+                max-heap data structure to continuously find the nth greatest element in the list and then swapping the element with \
+                the nth last element, where n is the number of times a greatest element has been found.";
     }
 
     async heapify(length,i) {

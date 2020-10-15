@@ -23,10 +23,18 @@ export default class QuickSort extends Sorter{
         for(let i = start; i < end; i++){
             await this.review(this.elements[lastSmall+1],this.elements[i]);
             this.unreview(this.elements[lastSmall+1],this.elements[i]);
+            if(this.forcedQuit) {
+                this.unhighlight(this.elements[pivot])
+                return;
+            }
             if(this.elements[i].value < this.elements[pivot].value){
                 lastSmall++;
                 debugger;
                 await this.swap(this.elements[i],this.elements[lastSmall]);
+                if(this.forcedQuit) {
+                    this.unhighlight(this.elements[pivot])
+                    return;
+                }
             }
         }
         lastSmall++;
@@ -41,8 +49,9 @@ export default class QuickSort extends Sorter{
             start = 0; end = this.elements.length-1;
         }
         if(start < end) {
+            if(this.forcedQuit) return;
             const partitionId = await this.partition(start,end);
-            
+            if(this.forcedQuit) return;
             await this.sort(start,partitionId - 1);
             await this.sort(partitionId + 1, end);
         }
