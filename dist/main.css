@@ -3,7 +3,8 @@ header {
     justify-self: center;
     align-self: center;
     font-size: 50px;
-    letter-spacing: 3px;
+    letter-spacing: 2px;
+    word-spacing: 15px;
 }
 
 body {
