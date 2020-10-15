@@ -9,6 +9,7 @@ export default class Sorter {
         this.forcedQuit = false;
     }
     async swap(bar1,bar2){
+        debugger;
         let small; let big;
         if (bar1.value < bar2.value) {
             small = bar1; big = bar2;

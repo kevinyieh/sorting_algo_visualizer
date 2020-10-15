@@ -5,6 +5,7 @@ export default class QuickSort extends Sorter{
     constructor(viz,speed){
         super(viz,speed);
         this.sort = this.sort.bind(this);
+        this.partition = this.partition.bind(this);
         // this.elements = [10,2,1,4,9,6,8,7,3,5,0,11,19,12,13,16,18,22,20,17,5,5,10,32];
     }
 
@@ -14,72 +15,46 @@ export default class QuickSort extends Sorter{
                 The algorithm is then applied to each side of the pivot."
     }
 
-    async sort(start,end){
-        if(typeof start === "undefined" && typeof end === "undefined"){
-            start = 0;
-            end = this.elements.length;
-        }
-        if( (end - start) < 2 ) return this.elements;
-        if(this.forcedQuit) {
-            this.unhighlight(this.elements[pivot]);
-            return;
-        }
-        let pivot = start;
+    async partition(start, end) {
+        let pivot = end;
+        let lastSmall = start - 1;
         this.highlight(this.elements[pivot]);
 
-        for(let i = start + 1; i < end; i++) {    
-            if (i === pivot) continue;
+        for(let i = start; i < end; i++){
+            await this.review(this.elements[lastSmall+1],this.elements[i]);
+            this.unreview(this.elements[lastSmall+1],this.elements[i]);
             if(this.forcedQuit) {
-                this.unhighlight(this.elements[pivot]);
+                this.unhighlight(this.elements[pivot])
                 return;
             }
-
-            await this.review(this.elements[i],this.elements[pivot]);
-            this.unreview(this.elements[i],this.elements[pivot]);
-            const val = this.elements[i].value;
-            if (val < this.elements[pivot].value && i > pivot) {
-                await this.swap(this.elements[i],this.elements[pivot]);
+            if(this.elements[i].value < this.elements[pivot].value){
+                lastSmall++;
+                debugger;
+                await this.swap(this.elements[i],this.elements[lastSmall]);
                 if(this.forcedQuit) {
-                    this.unhighlight(this.elements[pivot]);
+                    this.unhighlight(this.elements[pivot])
                     return;
                 }
-
-                this.unhighlight(this.elements[pivot]);
-                pivot = i;
-                this.highlight(this.elements[pivot]);
             }
-        };
-        for(let i = start; i < pivot; i++) {    
-            const val = this.elements[i].value;
-
-            await this.review(this.elements[i],this.elements[pivot]);
-            this.unreview(this.elements[i],this.elements[pivot]);
-
-            if( val > this.elements[pivot].value ){
-                if(this.forcedQuit) {
-                    this.unhighlight(this.elements[pivot]);
-                    return;
-                }
-                let j = i;
-                while(j < pivot){
-                    await this.swap(this.elements[j],this.elements[j+1]);
-                    if(this.forcedQuit) {
-                        this.unhighlight(this.elements[pivot]);
-                        return;
-                    }
-                    j++;
-                }
-                this.unhighlight(this.elements[pivot]);
-                i --;
-                pivot--;
-                this.highlight(this.elements[pivot]);
-            }
-        };
+        }
+        lastSmall++;
+        debugger;
+        await this.swap(this.elements[pivot],this.elements[lastSmall]);
         this.unhighlight(this.elements[pivot]);
-
-        await this.sort(start,pivot);
-        await this.sort(pivot+1,end);
-        return this.elements;
+        return lastSmall;
     }
     
+    async sort(start, end) {
+        if(typeof start === "undefined" && typeof end === "undefined"){
+            start = 0; end = this.elements.length-1;
+        }
+        if(start < end) {
+            if(this.forcedQuit) return;
+            const partitionId = await this.partition(start,end);
+            if(this.forcedQuit) return;
+            await this.sort(start,partitionId - 1);
+            await this.sort(partitionId + 1, end);
+        }
+        return this.elements;
+    }
 }
