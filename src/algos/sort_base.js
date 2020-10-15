@@ -60,12 +60,12 @@ export default class Sorter {
     }
     async review(bar1,bar2){
         bar1.review(); bar2.review();
-        await timeout(130*(1-this.speed)+10);
+        await timeout(200*(1-this.speed)**2+10);
     }
     unreview(bar1,bar2){
         bar1.unreview(); bar2.unreview();
     }
-    async highlight(bar){
+    highlight(bar){
         bar.highlight();
     }
     unhighlight(bar){

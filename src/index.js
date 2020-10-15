@@ -1,6 +1,8 @@
 import Visualizer from "./visualizer/visualizer";
 import bubbleSort from "./algos/bubble_sort";
 import mergeSort from "./algos/merge_sort";
+import quickSort from "./algos/quick_sort";
+import heapSort from "./algos/heap_sort";
 import Nav from "./nav/nav";
 import '@babel/polyfill';
 
@@ -10,7 +12,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const sorter = new mergeSort(visualizer);
     const nav = new Nav({
         "Bubble Sort": bubbleSort,
-        "Merge Sort": mergeSort
+        "Merge Sort": mergeSort,
+        "Quick Sort": quickSort,
+        "Heap Sort": heapSort
     }, visualizer);
 })
 
