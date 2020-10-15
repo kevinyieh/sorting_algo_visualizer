@@ -14,69 +14,72 @@ export default class QuickSort extends Sorter{
                 The algorithm is then applied to each side of the pivot."
     }
 
-    async sort(elements){
-        if(!elements) elements = this.elements;
-        if (elements.length < 2) return elements;
+    async sort(start,end){
+        if(typeof start === "undefined" && typeof end === "undefined"){
+            start = 0;
+            end = this.elements.length;
+        }
+        if( (end - start) < 2 ) return this.elements;
         if(this.forcedQuit) {
-            this.unhighlight(elements[pivot]);
+            this.unhighlight(this.elements[pivot]);
             return;
         }
-        let pivot = 0;
-        this.highlight(elements[pivot]);
+        let pivot = start;
+        this.highlight(this.elements[pivot]);
 
-        for(let i = 0; i < elements.length; i++) {    
+        for(let i = start + 1; i < end; i++) {    
             if (i === pivot) continue;
             if(this.forcedQuit) {
-                this.unhighlight(elements[pivot]);
+                this.unhighlight(this.elements[pivot]);
                 return;
             }
 
-            await this.review(elements[i],elements[pivot]);
-            this.unreview(elements[i],elements[pivot]);
-            
-            const val = elements[i].value;
-            if (val < elements[pivot].value && i > pivot) {
-                await this.swap(elements[i],elements[pivot]);
+            await this.review(this.elements[i],this.elements[pivot]);
+            this.unreview(this.elements[i],this.elements[pivot]);
+            const val = this.elements[i].value;
+            if (val < this.elements[pivot].value && i > pivot) {
+                await this.swap(this.elements[i],this.elements[pivot]);
                 if(this.forcedQuit) {
-                    this.unhighlight(elements[pivot]);
+                    this.unhighlight(this.elements[pivot]);
                     return;
                 }
 
-                this.unhighlight(elements[pivot]);
+                this.unhighlight(this.elements[pivot]);
                 pivot = i;
-                this.highlight(elements[pivot]);
+                this.highlight(this.elements[pivot]);
             }
         };
-        for(let i = 0; i < pivot; i++) {    
-            const val = elements[i].value;
+        for(let i = start; i < pivot; i++) {    
+            const val = this.elements[i].value;
 
-            await this.review(elements[i],elements[pivot]);
-            this.unreview(elements[i],elements[pivot]);
+            await this.review(this.elements[i],this.elements[pivot]);
+            this.unreview(this.elements[i],this.elements[pivot]);
 
-            if( val > elements[pivot].value ){
+            if( val > this.elements[pivot].value ){
                 if(this.forcedQuit) {
-                    this.unhighlight(elements[pivot]);
+                    this.unhighlight(this.elements[pivot]);
                     return;
                 }
                 let j = i;
                 while(j < pivot){
-                    await this.swap(elements[j],elements[j+1]);
+                    await this.swap(this.elements[j],this.elements[j+1]);
                     if(this.forcedQuit) {
-                        this.unhighlight(elements[pivot]);
+                        this.unhighlight(this.elements[pivot]);
                         return;
                     }
                     j++;
                 }
-                this.unhighlight(elements[pivot]);
+                this.unhighlight(this.elements[pivot]);
                 i --;
                 pivot--;
-                this.highlight(elements[pivot]);
+                this.highlight(this.elements[pivot]);
             }
         };
-        this.unhighlight(elements[pivot]);
-        const left = await this.sort(elements.slice(0,pivot));
-        const right = await this.sort(elements.slice(pivot + 1,elements.length));
-        return left.concat([elements[pivot]],right);
+        this.unhighlight(this.elements[pivot]);
+
+        await this.sort(start,pivot);
+        await this.sort(pivot+1,end);
+        return this.elements;
     }
     
 }
