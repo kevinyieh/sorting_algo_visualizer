@@ -105,28 +105,39 @@ export default class Nav {
         this.remote = document.createElement("div");
         this.remote.classList.add("remote");
 
+        this.playButtonContainer = document.createElement("div");
+        this.playButtonContainer.classList.add("play-container");
         this.playButton = document.createElement("i");
         this.playButton.classList.add("fas","fa-play");
+        this.playButtonContainer.appendChild(this.playButton);
 
+        this.resetButtonContainer = document.createElement("div");
+        this.resetButtonContainer.classList.add("reset-container");
         this.resetButton = document.createElement("i");
         this.resetButton.classList.add("fas","fa-sync-alt");
+        this.resetButtonContainer.appendChild(this.resetButton);
 
+        this.pauseButtonContainer = document.createElement("div");
+        this.pauseButtonContainer.classList.add("pause-container");
         this.pauseButton = document.createElement("i");
         this.pauseButton.classList.add("fas","fa-stop");
+        this.pauseButtonContainer.appendChild(this.pauseButton);
 
-        this.remote.appendChild(this.playButton);
-        this.remote.appendChild(this.pauseButton);
-        this.remote.appendChild(this.resetButton);
+        this.remote.appendChild(this.playButtonContainer);
+        this.remote.appendChild(this.pauseButtonContainer);
+        this.remote.appendChild(this.resetButtonContainer);
 
         this.controls.appendChild(this.remote);
     }
 
     setupDescription(){
+        this.descriptionTitle = document.createElement("h3");
+        this.descriptionTitle.innerHTML = "Brief Description"
         this.descriptionBody = document.createElement("p");
         this.descriptionBody.classList.add("description-body");
         const temp = new this.currentAlgo.sorter(this.visualizer,this.speed);
         this.descriptionBody.innerHTML = temp.describe();
-
+        this.description.appendChild(this.descriptionTitle);
         this.description.appendChild(this.descriptionBody);
     }
 

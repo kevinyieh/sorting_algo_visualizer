@@ -29,7 +29,6 @@ export default class QuickSort extends Sorter{
             }
             if(this.elements[i].value < this.elements[pivot].value){
                 lastSmall++;
-                debugger;
                 await this.swap(this.elements[i],this.elements[lastSmall]);
                 if(this.forcedQuit) {
                     this.unhighlight(this.elements[pivot])
@@ -38,7 +37,6 @@ export default class QuickSort extends Sorter{
             }
         }
         lastSmall++;
-        debugger;
         await this.swap(this.elements[pivot],this.elements[lastSmall]);
         this.unhighlight(this.elements[pivot]);
         return lastSmall;
