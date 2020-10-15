@@ -16,23 +16,11 @@ export default class Sorter {
             small = bar2; big = bar1;
         }
         const diff = Math.max(Math.floor((big.value - small.value)*(this.speed)),1);
+        const bigOriginal = big.value;
+        const smallOriginal = small.value;
         small.node.classList.add("swapping");
         big.node.classList.add("swapping");
-        this.swapHelp(small,
-            big,
-            diff,
-            small.value,
-            big.value)();
-        await timeout(700*(1-this.speed));
-        return null;
-    }  
-    swapHelp(small,big,diff,smallOriginal,bigOriginal){
-        return () => {
-            if(small.value === bigOriginal ) {
-                small.node.classList.remove("swapping");
-                big.node.classList.remove("swapping");
-                return null;
-            }
+        while(small.value !== bigOriginal){
             if (small.value + diff >= bigOriginal){
                 small.updateValue(bigOriginal);
                 big.updateValue(smallOriginal);
@@ -42,6 +30,27 @@ export default class Sorter {
             }
             small.node.style.height = `${small.value*3}px`;
             big.node.style.height = `${big.value*3}px`;
+            await this.nextFrame();
+        }
+        small.node.classList.remove("swapping");
+        big.node.classList.remove("swapping");
+        return null;
+    }  
+
+    async nextFrame() {
+        return new Promise(resolve => {
+            requestAnimationFrame(resolve);
+        })
+    }
+
+    swapHelp(small,big,diff,smallOriginal,bigOriginal){
+        return () => {
+            if(small.value === bigOriginal ) {
+                small.node.classList.remove("swapping");
+                big.node.classList.remove("swapping");
+                return null;
+            }
+            
             requestAnimationFrame(this.swapHelp(small,
                 big,
                 diff,
@@ -51,14 +60,13 @@ export default class Sorter {
     }
     async review(bar1,bar2){
         bar1.review(); bar2.review();
-        await timeout(130*(1-this.speed));
+        await timeout(200*(1-this.speed)**2+10);
     }
     unreview(bar1,bar2){
         bar1.unreview(); bar2.unreview();
     }
-    async highlight(bar){
+    highlight(bar){
         bar.highlight();
-        // await timeout(200);
     }
     unhighlight(bar){
         bar.unhighlight();

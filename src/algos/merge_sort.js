@@ -1,6 +1,5 @@
 import '@babel/polyfill';
 import Sorter from "./sort_base";
-import timeout from "../util/timeout";
 
 export default class MergeSort extends Sorter{
     constructor(viz,speed){
@@ -10,15 +9,21 @@ export default class MergeSort extends Sorter{
         // this.combine = this.combine.bind(this);
         // this.elements = [10,1,2,6,9,3,5,4,8,7]
     }
+    describe(){
+        return "Merge sort takes advantage of the ease of combining two sorted arrays into another sorted array.\
+                This algorithm breaks the list down into sorted subsets and merges those subsets until the entire \
+                list is sorted. You'll notice how there are smaller sorted groups within the set."
+    }
 
     async merge(start,mid,end) { 
         if(this.forcedQuit) return;
         let start2 = mid + 1; 
         if (this.elements[mid].value <= this.elements[start2].value) { 
+            await this.review(this.elements[start],this.elements[start2]);
+            this.unreview(this.elements[start],this.elements[start2]);
             return; 
         } 
         while (start <= mid && start2 <= end) { 
-            
             await this.review(this.elements[start],this.elements[start2]);
             this.unreview(this.elements[start],this.elements[start2]);
             if (this.elements[start].value <= this.elements[start2].value) { 
@@ -27,6 +32,7 @@ export default class MergeSort extends Sorter{
             else { 
                 let index = start2; 
                 while (index !== start) { 
+                    if(this.forcedQuit) return;
                     await this.review(this.elements[index],this.elements[index - 1]);
                     this.unreview(this.elements[index],this.elements[index - 1]);
                     await this.swap(this.elements[index],this.elements[index - 1])
@@ -36,7 +42,6 @@ export default class MergeSort extends Sorter{
                 mid++; 
                 start2++; 
             }
-            
         } 
     } 
 

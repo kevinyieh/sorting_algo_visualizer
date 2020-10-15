@@ -7,6 +7,13 @@ export default class bubbleSort extends Sorter{
         super(viz,speed);
         this.sort = this.sort.bind(this);
     }
+
+    describe(){
+        return "Bubble sort is one of the simpler sorting algorithms. It works by swapping adjacent elements when they are not sorted.\
+                In this case, the biggest numbers go towards the end.\
+                The numbers (or bars in this case) seem to \"bubble\" to the top (or back)."
+    }
+
     async sort() {
         let count = 1;
         for(let i = 0; i < this.elements.length; i++){
