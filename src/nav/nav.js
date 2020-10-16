@@ -108,7 +108,7 @@ export default class Nav {
         this.playButtonContainer = document.createElement("div");
         this.playButtonContainer.classList.add("play-container");
         this.playButton = document.createElement("i");
-        this.playButton.classList.add("fas","fa-play");
+        this.playButton.classList.add("fas","fa-sort-amount-down-alt","fa-rotate-270");
         this.playButtonContainer.appendChild(this.playButton);
 
         this.resetButtonContainer = document.createElement("div");
@@ -171,17 +171,17 @@ export default class Nav {
     }
     handleRemote(e){
         switch(e.target){
-            case this.playButton:
+            case this.playButtonContainer || this.playButton:
                 this.play();
                 break;
-            case this.resetButton:
+            case this.resetButtonContainer || this.resetButton:
                 if (this.sorter) {
                     this.sorter.forceQuit();
                     this.sorter = null;
                 };
                 this.visualizer.resetElements(this.quantitySlider.value);
                 break;
-            case this.pauseButton:
+            case this.pauseButtonContainer || this.pauseButton:
                 if (this.sorter) {
                     this.sorter.forceQuit();
                     this.sorter = null;

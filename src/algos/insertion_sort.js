@@ -8,7 +8,7 @@ export default class insertionSort extends Sorter {
     }
 
     describe() {
-        return "Insertion sort is one of the simpler sorting algorithms. It searches through the list from left to right, \
+        return "Insertion sort is another one of the simpler sorting algorithms. It searches through the list from left to right, \
                 until it finds an element that is less than the previous element. Once such an element is found, it is swapped \
                 with every preceding element that is greater than it.";
     }
