@@ -171,17 +171,20 @@ export default class Nav {
     }
     handleRemote(e){
         switch(e.target){
-            case this.playButtonContainer || this.playButton:
+            case this.playButton:
+            case this.playButtonContainer:
                 this.play();
                 break;
-            case this.resetButtonContainer || this.resetButton:
+            case this.resetButton:
+            case this.resetButtonContainer:
                 if (this.sorter) {
                     this.sorter.forceQuit();
                     this.sorter = null;
                 };
                 this.visualizer.resetElements(this.quantitySlider.value);
                 break;
-            case this.pauseButtonContainer || this.pauseButton:
+            case this.pauseButton:
+            case this.pauseButtonContainer:
                 if (this.sorter) {
                     this.sorter.forceQuit();
                     this.sorter = null;
