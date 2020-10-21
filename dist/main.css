@@ -6,6 +6,7 @@ header {
     letter-spacing: 2px;
     word-spacing: 15px;
     color: white;
+    height: 10%;
 }
 
 body {
@@ -15,7 +16,7 @@ body {
     padding: 0;
     font-family: "Ubuntu", sans-serif;
     background:#8E9EBF;
-    height: 100vh;
+    height: 90%;
     width: 100%;
     word-spacing: 3px;
     /* font-weight: 525; */
@@ -192,7 +193,6 @@ a {
 }
 .algo-item.selected {
     font-weight: 650;
-    font-size: 18px;
     background-color:  #ebf0fa;
 }
 .algo-item:hover {
