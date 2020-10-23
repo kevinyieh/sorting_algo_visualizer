@@ -1,7 +1,7 @@
 import '@babel/polyfill';
 import Sorter from "./sort_base";
 
-export default class insertionSort extends Sorter {
+export default class InsertionSort extends Sorter {
     constructor(viz,speed) {
         super(viz,speed);
         this.sort = this.sort.bind(this);

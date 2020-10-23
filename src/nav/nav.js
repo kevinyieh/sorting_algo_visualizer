@@ -32,12 +32,35 @@ export default class Nav {
     }
 
     setupLinks() {
+        // GITHUB LINK
         this.githubLink = document.createElement("a");
         this.githubIcon = document.createElement("i");
         this.githubIcon.classList.add("fab","fa-github");
         this.githubLink.appendChild(this.githubIcon);
+        // LINKED IN
+        this.linkedInLink = document.createElement("a");
+        this.linkedInIcon = document.createElement("i");
+        this.linkedInIcon.classList.add("fab","fa-linkedin-in");
+        this.linkedInLink.appendChild(this.linkedInIcon);
+        // ANGEL
+        this.angelLink = document.createElement("a");
+        this.angelIcon = document.createElement("i");
+        this.angelIcon.classList.add("fab","fa-angellist");
+        this.angelLink.appendChild(this.angelIcon);
+        // PERSONAL PAGE
+        this.personalLink = document.createElement("a");
+        this.personalIcon = document.createElement("i");
+        this.personalIcon.classList.add("far","fa-user");
+        this.personalLink.appendChild(this.personalIcon);
+
         DOMUtil.setAttributes(this.githubLink,{href: "https://github.com/kevinyieh/sorting_algo_visualizer"})
+        DOMUtil.setAttributes(this.linkedInLink,{href: "//www.linkedin.com/in/kevin-yieh"})
+        DOMUtil.setAttributes(this.angelLink,{href: "https://angel.co/u/kevin-yieh"})
+        DOMUtil.setAttributes(this.personalLink,{href: "https://kevinyieh.github.io/"})
         this.navLinks.appendChild(this.githubLink);
+        this.navLinks.appendChild(this.linkedInLink);
+        this.navLinks.appendChild(this.angelLink);
+        this.navLinks.appendChild(this.personalLink);
     }
 
     setupControls(){
