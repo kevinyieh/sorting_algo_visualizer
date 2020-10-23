@@ -1,12 +1,14 @@
 import '@babel/polyfill';
 import Bar from "./bar";
-import timeout from "../util/timeout";
+import barParams from "./bar_params";
 
 export default class Visualizer {
     constructor(n){
         this.barChart = document.getElementById("bar-chart");
-        this.barChart.style.height = "600px";
-        this.barChart.style.width = "900px";
+        this.barChart.style.height = "100%";
+        this.barChart.style.width = "85%";
+        this.maxVal = barParams.maxVal;
+        this.minVal = barParams.minVal;
         this.resetElements(n);
         this.removeAllChildren = this.removeAllChildren.bind(this);
     }
@@ -16,9 +18,9 @@ export default class Visualizer {
         this.removeAllChildren();
         this.elements = [];
         for(let i = 0; i < n; i++){
-            const value = 10 + Math.floor(Math.random()*190);
+            const value = this.minVal + Math.floor(Math.random()*(this.maxVal-this.minVal));
             const width = (1/n)*100;
-            this.elements.push(new Bar(value,width,this.barChart));
+            this.elements.push(new Bar(value,width,this.barChart,this.maxVal));
         }
     }
     finished(){

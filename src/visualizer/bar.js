@@ -1,10 +1,11 @@
 import '@babel/polyfill';
 
 export default class Bar {
-    constructor(value,width,barChart){
+    constructor(value,width,barChart,maxVal){
         let bar = document.createElement("div");
+        this.maxVal = maxVal;
         bar.classList.add("bar");
-        bar.style.height = `${value*3}px`;
+        bar.style.height = `${(value/maxVal)*100}%`;
         bar.style.width = `${width}%`;
         barChart.appendChild(bar);
         this.label = document.createElement("div");
@@ -27,7 +28,14 @@ export default class Bar {
         this.node.classList.remove('highlight');
     }
     updateValue(val){
+        debugger;
         this.value= val;
         this.label.innerHTML = val;
+        debugger;
+    }
+    updateHeight(){
+        debugger;
+        this.node.style.height = `${(this.value/this.maxVal)*100}%`;
+        debugger;
     }
 }

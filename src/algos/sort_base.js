@@ -25,11 +25,11 @@ export default class Sorter {
                 small.updateValue(bigOriginal);
                 big.updateValue(smallOriginal);
             }else {
-                small.value += diff;
-                big.value -= diff;
+                small.updateValue(small.value + diff);
+                big.updateValue(big.value - diff);
             }
-            small.node.style.height = `${small.value*3}px`;
-            big.node.style.height = `${big.value*3}px`;
+            small.updateHeight();
+            big.updateHeight();
             await this.nextFrame();
         }
         small.node.classList.remove("swapping");
@@ -41,22 +41,6 @@ export default class Sorter {
         return new Promise(resolve => {
             requestAnimationFrame(resolve);
         })
-    }
-
-    swapHelp(small,big,diff,smallOriginal,bigOriginal){
-        return () => {
-            if(small.value === bigOriginal ) {
-                small.node.classList.remove("swapping");
-                big.node.classList.remove("swapping");
-                return null;
-            }
-            
-            requestAnimationFrame(this.swapHelp(small,
-                big,
-                diff,
-                smallOriginal,
-                bigOriginal))
-        }
     }
     async review(bar1,bar2){
         bar1.review(); bar2.review();

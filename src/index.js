@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
     window.visualizer = visualizer;
     const sorter = new mergeSort(visualizer);
     const nav = new Nav({
-        "Bubble Sort": bubbleSort,
-        "Merge Sort": mergeSort,
-        "Quick Sort": quickSort,
-        "Heap Sort": heapSort,
-        "Insertion Sort": insertionSort
+        "Bubble": bubbleSort,
+        "Merge": mergeSort,
+        "Quick": quickSort,
+        "Heap": heapSort,
+        "Insertion": insertionSort
     }, visualizer);
 })
 
