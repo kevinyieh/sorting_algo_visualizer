@@ -4,6 +4,7 @@ import MergeSort from "./algos/merge_sort";
 import QuickSort from "./algos/quick_sort";
 import HeapSort from "./algos/heap_sort";
 import InsertionSort from "./algos/insertion_sort";
+import CocktailSort from "./algos/cocktail_sort";
 import Nav from "./nav/nav";
 import '@babel/polyfill';
 
@@ -15,7 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
         "Merge": MergeSort,
         "Quick": QuickSort,
         "Heap": HeapSort,
-        "Insertion": InsertionSort
+        "Insertion": InsertionSort,
+        "Cocktail": CocktailSort
     }, visualizer);
 })
 
