@@ -98,7 +98,7 @@ export default class Nav {
         const quantitySliderLabel = document.createElement("label");
         quantitySliderLabel.innerHTML = "Buckets ";
         this.quantitySlider = document.createElement("input");
-        DOMUtil.setAttributes(this.quantitySlider,{type: "range", min: "6", max:"100", value: `${this.defaultBuckets}`, class:"quantity-slider"});
+        DOMUtil.setAttributes(this.quantitySlider,{type: "range", min: "6", max:"70", value: `${this.defaultBuckets}`, class:"quantity-slider"});
         quantitySliderLabel.appendChild(this.quantitySlider);
         this.quantitySliderContainer.appendChild(quantitySliderLabel);
         sliderContainer.appendChild(this.quantitySliderContainer);

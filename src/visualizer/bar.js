@@ -28,14 +28,10 @@ export default class Bar {
         this.node.classList.remove('highlight');
     }
     updateValue(val){
-        debugger;
         this.value= val;
         this.label.innerHTML = val;
-        debugger;
     }
     updateHeight(){
-        debugger;
         this.node.style.height = `${(this.value/this.maxVal)*100}%`;
-        debugger;
     }
 }

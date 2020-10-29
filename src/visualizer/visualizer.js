@@ -6,7 +6,6 @@ export default class Visualizer {
     constructor(n){
         this.barChart = document.getElementById("bar-chart");
         this.barChart.style.height = "100%";
-        this.barChart.style.width = "85%";
         this.maxVal = barParams.maxVal;
         this.minVal = barParams.minVal;
         this.resetElements(n);
